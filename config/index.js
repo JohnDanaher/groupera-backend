@@ -40,6 +40,11 @@ module.exports = (app) => {
 
 	app.use(cors(corsConfig))
 	app.options('*', cors(corsConfig))
+	app.use(
+		cors({
+			origin: ['http://localhost:3000', process.env.ORIGIN],
+		})
+	)
 
 	// In development environment the app logs
 	app.use(logger('dev'))

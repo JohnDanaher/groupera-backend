@@ -7,17 +7,12 @@ const mongoose = require('mongoose')
 
 const MONGO_URI = process.env.DB_CLUSTER
 
-const connectDatabase = async () => {
-	try {
-		mongoose.set('useNewUrlParser', true)
-
-		await mongoose.connect(MONGO_URI)
-
-		console.log('connected to database')
-	} catch (error) {
-		console.log(error)
-		process.exit(1)
-	}
-}
-
-connectDatabase()
+mongoose
+	.connect(MONGO_URI)
+	.then((x) => {
+		const dbName = x.connections[0].name
+		console.log(`Connected to Mongo! Database name: "${dbName}"`)
+	})
+	.catch((err) => {
+		console.error('Error connecting to mongo: ', err)
+	})

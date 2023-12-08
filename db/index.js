@@ -7,6 +7,7 @@ const mongoose = require('mongoose')
 
 const MONGO_URI = process.env.DB_CLUSTER
 
+mongoose.set('strictQuery', false)
 mongoose
 	.connect(MONGO_URI)
 	.then((x) => {
